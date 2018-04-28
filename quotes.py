@@ -2,6 +2,12 @@
 
 import requests
 import bs4
+import textwrap
+
+
+""" TODO: Use pandas to organise the quotes in dataframes then style them with
+          matplolib
+"""
 
 
 def perceval():
@@ -13,7 +19,7 @@ def perceval():
 
     print('\n Citations de Perceval \n')
     for x in quotes:
-        print(str(x) + '\n')
+        print(str(textwrap.fill(x, width=90) + '\n'))
 
 
 perceval()
@@ -28,7 +34,7 @@ def karadoc():
 
     print('\n Citations de Karadoc \n')
     for x in quotes:
-        print(str(x) + '\n')
+        print(str(textwrap.fill(x, width=90) + '\n'))
 
 
 karadoc()
@@ -43,7 +49,7 @@ def arthur():
 
     print('\n Citations d\'Arthur \n')
     for x in quotes:
-        print(str(x) + '\n')
+        print(str(textwrap.fill(x, width=90) + '\n'))
 
 
 arthur()
