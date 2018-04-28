@@ -17,9 +17,12 @@ def perceval():
     quote = soup.find_all('div', class_='citation')
     quotes = [x.text for x in quote]
 
+    ref = soup.find_all('div', class_='ref')
+    refs = [x.text for x in ref]
+
     print('\n Citations de Perceval \n')
-    for x in quotes:
-        print(str(textwrap.fill(x, width=110) + '\n'))
+    for quote, ref in zip(quotes, refs):
+        print(str(textwrap.fill(quote, width=110) + '\n') + str(textwrap.fill(ref, width=90) + '\n'))
 
 
 perceval()
@@ -32,9 +35,12 @@ def karadoc():
     quote = soup.find_all('div', class_='citation')
     quotes = [x.text for x in quote]
 
+    ref = soup.find_all('div', class_='ref')
+    refs = [x.text for x in ref]
+
     print('\n Citations de Karadoc \n')
-    for x in quotes:
-        print(str(textwrap.fill(x, width=110) + '\n'))
+    for quote, ref in zip(quotes, refs):
+        print(str(textwrap.fill(quote, width=110) + '\n') + str(textwrap.fill(ref, width=90) + '\n'))
 
 
 karadoc()
@@ -47,9 +53,12 @@ def arthur():
     quote = soup.find_all('div', class_='citation')
     quotes = [x.text for x in quote]
 
+    ref = soup.find_all('div', class_='ref')
+    refs = [x.text for x in ref]
+
     print('\n Citations d\'Arthur \n')
-    for x in quotes:
-        print(str(textwrap.fill(x, width=110) + '\n'))
+    for quote, ref in zip(quotes, refs):
+        print(str(textwrap.fill(quote, width=110) + '\n') + str(textwrap.fill(ref, width=90) + '\n'))
 
 
 arthur()
@@ -62,9 +71,12 @@ def merlin():
     quote = soup.find_all('div', class_='citation')
     quotes = [x.text for x in quote]
 
+    ref = soup.find_all('div', class_='ref')
+    refs = [x.text for x in ref]
+
     print('\n Citations de Merlin \n')
-    for x in quotes:
-        print(str(textwrap.fill(x, width=110) + '\n'))
+    for quote, ref in zip(quotes, refs):
+        print(str(textwrap.fill(quote, width=110) + '\n') + str(textwrap.fill(ref, width=90) + '\n'))
 
 
 merlin()
