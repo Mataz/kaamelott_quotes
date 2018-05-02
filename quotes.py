@@ -9,13 +9,16 @@ from urllib.parse import urljoin
 """ TODO: Use pandas to organise the quotes in dataframes then style them with
           matplolib
 """
+headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'}
 
 
 def get_urls():
 
     url = 'https://fr.wikiquote.org/wiki/Kaamelott'
 
-    req = requests.get(url).text
+    req = requests.get(url, headers=headers).text
     soup = bs4.BeautifulSoup(req, 'lxml')
 
     for link in soup.select('dd a[href]')[:27]:
@@ -26,7 +29,7 @@ get_urls()
 
 
 def perceval():
-    perceval_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Perceval').text
+    perceval_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Perceval', headers=headers).text
     soup = bs4.BeautifulSoup(perceval_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -44,7 +47,7 @@ perceval()
 
 
 def karadoc():
-    karadoc_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Karadoc').text
+    karadoc_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Karadoc', headers=headers).text
     soup = bs4.BeautifulSoup(karadoc_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -62,7 +65,7 @@ karadoc()
 
 
 def arthur():
-    arthur_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Arthur').text
+    arthur_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Arthur', headers=headers).text
     soup = bs4.BeautifulSoup(arthur_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -80,7 +83,7 @@ arthur()
 
 
 def merlin():
-    merlin_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Merlin').text
+    merlin_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Merlin', headers=headers).text
     soup = bs4.BeautifulSoup(merlin_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -98,7 +101,7 @@ merlin()
 
 
 def leodagan():
-    leodagan_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/L%C3%A9odagan').text
+    leodagan_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/L%C3%A9odagan', headers=headers).text
     soup = bs4.BeautifulSoup(leodagan_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -116,7 +119,7 @@ leodagan()
 
 
 def père_blaise():
-    père_blaise_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/P%C3%A8re_Blaise').text
+    père_blaise_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/P%C3%A8re_Blaise', headers=headers).text
     soup = bs4.BeautifulSoup(père_blaise_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -135,7 +138,7 @@ père_blaise()
 
 
 def bohort():
-    bohort_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Bohort').text
+    bohort_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Bohort', headers=headers).text
     soup = bs4.BeautifulSoup(bohort_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -154,7 +157,7 @@ bohort()
 
 
 def gauvain():
-    gauvain_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Gauvain').text
+    gauvain_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Gauvain', headers=headers).text
     soup = bs4.BeautifulSoup(gauvain_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -173,7 +176,7 @@ gauvain()
 
 
 def guenièvre():
-    guenièvre_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Gueni%C3%A8vre').text
+    guenièvre_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Gueni%C3%A8vre', headers=headers).text
     soup = bs4.BeautifulSoup(guenièvre_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
@@ -192,7 +195,7 @@ guenièvre()
 
 
 def guethenoc():
-    guethenoc_source = requests.get('https://fr.wikipedia.org/wiki/Personnages_de_Kaamelott#Guethenoc').text
+    guethenoc_source = requests.get('https://fr.wikipedia.org/wiki/Personnages_de_Kaamelott#Guethenoc', headers=headers).text
     soup = bs4.BeautifulSoup(guethenoc_source, 'lxml')
 
     quote = soup.find_all('div', class_='citation')
