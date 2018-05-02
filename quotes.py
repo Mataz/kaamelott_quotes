@@ -3,11 +3,26 @@
 import requests
 import bs4
 import textwrap
+from urllib.parse import urljoin
 
 
 """ TODO: Use pandas to organise the quotes in dataframes then style them with
           matplolib
 """
+
+
+def get_urls():
+
+    url = 'https://fr.wikiquote.org/wiki/Kaamelott'
+
+    req = requests.get(url).text
+    soup = bs4.BeautifulSoup(req, 'lxml')
+
+    for link in soup.select('dd a[href]')[:27]:
+        print(urljoin(url, link.get('href')))
+
+
+get_urls()
 
 
 def perceval():
@@ -193,5 +208,6 @@ def guethenoc():
 
 
 guethenoc()
+
 
 
