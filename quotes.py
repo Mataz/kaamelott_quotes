@@ -213,4 +213,21 @@ def guethenoc():
 guethenoc()
 
 
+def lancelot():
+    lancelot_source = requests.get('https://fr.wikiquote.org/wiki/Kaamelott/Lancelot', headers=headers).text
+    soup = bs4.BeautifulSoup(lancelot_source, 'lxml')
+
+    quote = soup.find_all('div', class_='citation')
+    quotes = [x.text for x in quote]
+
+    ref = soup.find_all('div', class_='ref')
+    refs = [x.text for x in ref]
+
+    print('\n Citations de Lancelot \n')
+    for quote, ref in zip(quotes, refs):
+        print(str(textwrap.fill(quote, width=110) + '\n') + str(
+            textwrap.fill(ref, width=90) + '\n'))
+
+
+lancelot()
 
