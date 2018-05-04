@@ -262,9 +262,7 @@ def kaamelott():
     req = requests.get(url, headers=headers).text
     soup = bs4.BeautifulSoup(req, 'lxml')
 
-    
-
-    kaamelott_db = {}
+    # kaamelott_db = {}
 
     quote = soup.find_all('div', class_='citation')
     quotes = [x.text for x in quote]
@@ -273,17 +271,10 @@ def kaamelott():
     refs = [x.text for x in ref]
 
     kaamelott_dict = dict(zip(quotes, refs))
-    
-    
-    # print(kaamelott_dict)
-    
 
     kaamelott_df = pd.DataFrame.from_dict(kaamelott_dict, orient='index')
     print(kaamelott_df)
     kaamelott_df.to_csv('kaamelott_citations_db.csv')
     
-
-
-
 
 kaamelott()
