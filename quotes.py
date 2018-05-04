@@ -5,8 +5,6 @@ import bs4
 import textwrap
 from urllib.parse import urljoin
 import pandas as pd
-from collections import defaultdict
-
 
 pd.set_option('display.max_colwidth', 120)
 
