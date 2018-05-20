@@ -1,7 +1,8 @@
 # quotes.py - Citations des personnages de Kaamelott
-
 import requests
 import bs4
+import json
+from collections import namedtuple
 import textwrap
 from urllib.parse import urljoin
 import pandas as pd
@@ -14,6 +15,30 @@ pd.set_option('display.max_colwidth', 120)
 headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
                       'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'}
+
+# Scrape the wiki page and dump the json data in a list
+class Scraper(object):
+    def __init__(self):         # Init the url where we'll scrape the data from
+        self.url = 'https://fr.wikiquote.org/wiki/Kaamelott'
+
+    def scrape_site(self):      # Method to scrape the site
+        req = requests.get(self.url)
+        soup = bs4.BeautifulSoup(req.content, 'html.parser')
+        data = []
+        if soup:
+            names = [x.text for x in soup.find_all('span', class_='mw-headline')]
+            quotes = [x.text for x in soup.find_all('div', class_='citation')]
+            refs = [x.text for x in soup.find_all('div', class_='ref')]
+        data.append({
+            'Name': names,
+            'Quotes': quotes,
+            'References': refs
+        })
+        return json.dumps(data, indent=2)
+
+
+scraper = Scraper()
+print(scraper.scrape_site())
 
 
 # def get_urls():
@@ -255,24 +280,14 @@ headers = {
 # venec()
 
 
-def kaamelott():
-    url = 'https://fr.wikiquote.org/wiki/Kaamelott'
-    req = requests.get(url, headers=headers).text
-    soup = bs4.BeautifulSoup(req, 'lxml')
 
-    # kaamelott_db = {}
 
-    quote = soup.find_all('div', class_='citation')
-    quotes = [x.text for x in quote]
 
-    ref = soup.find_all('div', class_='ref')
-    refs = [x.text for x in ref]
 
-    kaamelott_dict = dict(zip(quotes, refs))
 
-    kaamelott_df = pd.DataFrame.from_dict(kaamelott_dict, orient='index')
-    print(kaamelott_df)
-    kaamelott_df.to_csv('kaamelott_citations_db.csv')
-    
 
-kaamelott()
+
+
+
+
+
