@@ -1,10 +1,10 @@
 # quotes.py - Citations des personnages de Kaamelott
 import requests
-import bs4
+from bs4 import BeautifulSoup
 import json
 from collections import namedtuple
-import textwrap
-from urllib.parse import urljoin
+# import textwrap
+# from urllib.parse import urljoin
 import pandas as pd
 
 pd.set_option('display.max_colwidth', 120)
@@ -19,20 +19,28 @@ headers = {
 # Scrape the wiki page and dump the json data in a list
 class Scraper(object):
     def __init__(self):         # Init the url where we'll scrape the data from
-        self.url = 'https://fr.wikiquote.org/wiki/Kaamelott'
+        self.urls = ['https://fr.wikiquote.org/wiki/Kaamelott', 'https://fr.wikiquote.org/wiki/Kaamelott/Perceval',
+                     'https://fr.wikiquote.org/wiki/Kaamelott/Karadoc', 'https://fr.wikiquote.org/wiki/Kaamelott/Arthur',
+                     'https://fr.wikiquote.org/wiki/Kaamelott/Merlin', 'https://fr.wikiquote.org/wiki/Kaamelott/P%C3%A8re_Blaise',
+                     'https://fr.wikiquote.org/wiki/Kaamelott/Bohort', 'https://fr.wikiquote.org/wiki/Kaamelott/Gauvain',
+                     'https://fr.wikiquote.org/wiki/Kaamelott/L%C3%A9odagan', 'https://fr.wikiquote.org/wiki/Kaamelott/Gueni%C3%A8vre',
+                     'https://fr.wikipedia.org/wiki/Personnages_de_Kaamelott#Guethenoc', 'https://fr.wikiquote.org/wiki/Kaamelott/Lancelot',
+                     'https://fr.wikiquote.org/wiki/Kaamelott/Venec']
 
     def scrape_site(self):      # Method to scrape the site
-        req = requests.get(self.url)
-        soup = bs4.BeautifulSoup(req.content, 'html.parser')
-        data = []
-        if soup:
-            names = [x.text for x in soup.find_all('span', class_='mw-headline')]
-            quotes = [x.text for x in soup.find_all('div', class_='citation')]
-            refs = [x.text for x in soup.find_all('div', class_='ref')]
-        data.append({
-            'Name': names,
-            'Quotes': quotes,
-            'References': refs
+        for url in self.urls:
+            req = requests.get(url)
+            soup = bs4.BeautifulSoup(req.content, 'html.parser')
+            data = []
+
+            if soup:
+                names = [x.text for x in soup.find_all('span', class_='mw-headline')]
+                quotes = [x.text for x in soup.find_all('div', class_='citation')]
+                refs = [x.text for x in soup.find_all('div', class_='ref')]
+            data.append({
+                'Name': names,
+                'Quotes': quotes,
+                'References': refs
         })
         return json.dumps(data, indent=2)
 
