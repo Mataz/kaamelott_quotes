@@ -19,8 +19,8 @@ urls = ['https://fr.wikiquote.org/wiki/Kaamelott', 'https://fr.wikiquote.org/wik
         'https://fr.wikiquote.org/wiki/Kaamelott/Merlin', 'https://fr.wikiquote.org/wiki/Kaamelott/P%C3%A8re_Blaise',
         'https://fr.wikiquote.org/wiki/Kaamelott/Bohort', 'https://fr.wikiquote.org/wiki/Kaamelott/Gauvain',
         'https://fr.wikiquote.org/wiki/Kaamelott/L%C3%A9odagan', 'https://fr.wikiquote.org/wiki/Kaamelott/Gueni%C3%A8vre',
-        'https://fr.wikipedia.org/wiki/Personnages_de_Kaamelott#Guethenoc', 'https://fr.wikiquote.org/wiki/Kaamelott/Lancelot',
-        'https://fr.wikiquote.org/wiki/Kaamelott/Venec']
+        'https://fr.wikiquote.org/wiki/Kaamelott/Lancelot', 'https://fr.wikiquote.org/wiki/Kaamelott/Venec']
+data = []
 
 
 # Scrape the characters' names, quotes and their references over a list of URLs.
@@ -28,17 +28,20 @@ def scrape_site():
     for url in urls:
         req = requests.get(url, headers=headers)
         soup = bs4.BeautifulSoup(req.content, 'lxml')
-        data = []
 
-        names = [x.text for x in soup.find_all('span', class_='mw-headline')]
-        quotes = [x.text for x in soup.find_all('div', class_='citation')]
-        refs = [x.text for x in soup.find_all('div', class_='ref')]
+        if url is not None:
+
+            names = [x.text for x in soup.find_all('span', class_='mw-headline')]
+            quotes = [x.text for x in soup.find_all('div', class_='citation')]
+            refs = [x.text for x in soup.find_all('div', class_='ref')]
+
         data.append({
             'Name': names,
             'Quotes': quotes,
             'References': refs
         })
-        return json.dumps(data, sort_keys=True, indent=2, ensure_ascii=False)
+
+    return json.dumps(data, sort_keys=True, indent=2, ensure_ascii=False)
 
 
 print(scrape_site())
