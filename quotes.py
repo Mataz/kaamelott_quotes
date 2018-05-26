@@ -38,7 +38,7 @@ def scrape_site():
             'Quotes': quotes,
             'References': refs
         })
-        return json.dumps(data, indent=2)
+        return json.dumps(data, sort_keys=True, indent=2, ensure_ascii=False)
 
 
 print(scrape_site())
